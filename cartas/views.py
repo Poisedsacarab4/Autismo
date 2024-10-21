@@ -1,8 +1,27 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+# aplicacion/views.py
 
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
-# Create your views here.
-def hola(request):
-    return HttpResponse("<h1>hola chavales del youtube</h1>")
+def index(request):
+    return render(request, "index.html")  # Renderiza la página principal
+
+def user_login(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('index')  # Redirige a la página principal después de iniciar sesión
+        else:
+            return render(request, 'login.html', {'error': 'Credenciales inválidas'})
+    return render(request, 'login.html')
+
+@login_required
+def user_logout(request):
+    logout(request)
+    return redirect('index')  # Redirige a la página principal después de cerrar sesión
+
 
