@@ -11,6 +11,7 @@
     {% if user.is_authenticated %}
         <p>Hola, {{ user.username }}!</p>
         <a href="{% url 'logout' %}">Cerrar Sesión</a>
+        <a href="{% url 'escribir' %}">escribe tus cartas aqui</a>
     {% else %}
         <a href="{% url 'login' %}">Iniciar Sesión</a>
     {% endif %}

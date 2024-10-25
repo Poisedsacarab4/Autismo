@@ -24,11 +24,5 @@ def user_logout(request):
     logout(request)
     return redirect('index')  # Redirige a la página principal después de cerrar sesión
 
-
-<<<<<<< HEAD
-=======
-# Create your views here.
-def hola(request):
-    return HttpResponse("<h1>hola chavales del youtube :v</h1><h2>VOCES AUTISTAS 🗣🗣🗣🗣🗣 </h2><h3>xd</h3>")
-
->>>>>>> c04e14b1d91878988385dde52c3ff7e6473ca082
+def escribircartas(request):
+    return render(request,'escrbir.html')

@@ -23,4 +23,5 @@ urlpatterns = [
     path('', views.index, name='index'),  # Página principal
     path('login/', views.user_login, name='login'),  # Vista de login
     path('logout/', views.user_logout, name='logout'),  # Vista de logout
+    path('escribir/',views.escribircartas, name='escribir')
 ]

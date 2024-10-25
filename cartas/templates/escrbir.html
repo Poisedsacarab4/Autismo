@@ -1,0 +1,21 @@
+
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>escribir</title>
+</head>
+<body>
+    <h1>escribe tus cartas aqui!!</h1>
+    {% if error %}
+        <p style="color:red;">{{ error }}</p>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="titulo" placeholder="Dale titulo a tu carta" required>
+        <input type="text" name="contenido" placeholder="escribe tu carta aqui" required>
+        <button type="submit">Enviar</button>
+    </form>
+    <a href="{% url 'index' %}">volver a la pagina principal</a>
+</body>
+</html>
