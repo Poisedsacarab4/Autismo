@@ -3,7 +3,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from cartas.models import Carta  # Asegúrate de que el modelo esté importado
+from cartas.models import Carta  
 
 
 def index(request):
@@ -25,8 +25,6 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect('index')  # Redirige a la página principal después de cerrar sesión
-
-
 
 @login_required  # Asegúrate de que solo los usuarios autenticados puedan enviar cartas
 def escribir_carta(request):
