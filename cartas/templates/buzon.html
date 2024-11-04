@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buzón de Cartas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .buzon {
+            max-width: 600px;
+            margin: auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+        .carta {
+            background: #e9ecef;
+            border-radius: 5px;
+            padding: 15px;
+        }
+        .carta h2 {
+            margin: 0 0 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="buzon">
+    <h1>Mi Buzón de Cartas</h1>
+
+    {% if carta %}
+        <div class="carta">
+            <h2>{{ carta.titulo }}</h2>
+            <p>{{ carta.contenido }}</p>
+        </div>
+    {% else %}
+        <p>No hay cartas disponibles para mostrar.</p>
+    {% endif %}
+</div>
+<a href="{% url 'index' %}">volver a la pagina principal</a>
+</body>
+</html>

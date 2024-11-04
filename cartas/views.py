@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from cartas.models import Carta  
-
+import random
 
 def index(request):
     return render(request, "index.html")  # Renderiza la página principal
@@ -39,3 +39,18 @@ def escribir_carta(request):
         return redirect('index')  # Redirige a la página principal (ajusta el nombre según tu URL)
     
     return render(request, 'escrbir.html')  # Cambia el nombre del template al correcto
+
+def buzon(request):
+    # Obtener el usuario actual
+    usuario_actual = request.user
+
+    # Filtrar las cartas que no pertenecen al usuario actual
+    cartas_disponibles = Carta.objects.exclude(autor=usuario_actual)
+
+    # Si hay cartas disponibles, seleccionar una aleatoriamente
+    carta_aleatoria = None
+    if cartas_disponibles.exists():
+        carta_aleatoria = random.choice(cartas_disponibles)
+
+    # Renderizar la plantilla con la carta seleccionada
+    return render(request, 'buzon.html', {'carta': carta_aleatoria})    
