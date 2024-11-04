@@ -25,4 +25,7 @@ urlpatterns = [
     path('logout/', views.user_logout, name='logout'),  # Vista de logout
     path('escribir/',views.escribir_carta, name='escribir'),
     path('buzon/', views.buzon , name='buzon'),
+    path('buzon/responder/<int:carta_id>/', views.responder_carta, name='responder_carta'),
+    path('buzon/ver/<int:carta_id>/',views. ver_carta, name='ver_carta'),
+    path('mis_cartas/',views. mis_cartas, name='mis_cartas'), 
 ]

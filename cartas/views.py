@@ -1,9 +1,11 @@
 # aplicacion/views.py
 
-from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from cartas.models import Carta  
+import random
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Carta, Respuesta
+from .forms import RespuestaForm
 import random
 
 def index(request):
@@ -40,17 +42,69 @@ def escribir_carta(request):
     
     return render(request, 'escrbir.html')  # Cambia el nombre del template al correcto
 
-def buzon(request):
-    # Obtener el usuario actual
-    usuario_actual = request.user
 
-    # Filtrar las cartas que no pertenecen al usuario actual
+def buzon(request):
+    usuario_actual = request.user
     cartas_disponibles = Carta.objects.exclude(autor=usuario_actual)
 
-    # Si hay cartas disponibles, seleccionar una aleatoriamente
     carta_aleatoria = None
     if cartas_disponibles.exists():
         carta_aleatoria = random.choice(cartas_disponibles)
 
-    # Renderizar la plantilla con la carta seleccionada
-    return render(request, 'buzon.html', {'carta': carta_aleatoria})    
+    return render(request, 'buzon.html', {'carta': carta_aleatoria})
+
+def responder_carta(request, carta_id):
+    carta = get_object_or_404(Carta, id=carta_id)
+
+    if request.method == 'POST':
+        form = RespuestaForm(request.POST)
+        if form.is_valid():
+            respuesta = form.save(commit=False)
+            respuesta.carta = carta
+            respuesta.autor = request.user
+            respuesta.save()
+            return redirect('ver_carta', carta_id=carta.id)  # Redirigir a la vista de la carta
+
+    else:
+        form = RespuestaForm()
+
+    return render(request, 'responder_carta.html', {'carta': carta, 'form': form})
+
+def ver_carta(request, carta_id):
+    carta = get_object_or_404(Carta, id=carta_id)
+    respuestas = carta.respuestas.all()  # Obtener respuestas relacionadas
+
+    if request.method == 'POST':
+        form = RespuestaForm(request.POST)
+        if form.is_valid():
+            respuesta = form.save(commit=False)
+            respuesta.carta = carta
+            respuesta.autor = request.user
+            respuesta.save()
+            return redirect('ver_carta', carta_id=carta.id)  # Redirigir a la misma vista
+
+    else:
+        form = RespuestaForm()
+
+    return render(request, 'ver_carta.html', {'carta': carta, 'respuestas': respuestas, 'form': form})
+
+def mis_cartas(request):
+    usuario_actual = request.user
+    cartas = Carta.objects.filter(autor=usuario_actual).prefetch_related('respuestas')  # Cargar respuestas relacionadas
+
+    if request.method == 'POST':
+        respuesta_id = request.POST.get('respuesta_id')
+        respuesta = get_object_or_404(Respuesta, id=respuesta_id)
+        form = RespuestaForm(request.POST)
+
+        if form.is_valid():
+            nueva_respuesta = form.save(commit=False)
+            nueva_respuesta.carta = respuesta.carta  # Asociar a la carta original
+            nueva_respuesta.autor = request.user  # Establecer el autor como el usuario actual
+            nueva_respuesta.save()
+            return redirect('mis_cartas')  # Redirigir a la misma vista
+
+    else:
+        form = RespuestaForm()
+
+    return render(request, 'mis_cartas.html', {'cartas': cartas, 'form': form})

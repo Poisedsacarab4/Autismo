@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Cartas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .cartas {
+            max-width: 600px;
+            margin: auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+        .carta {
+            background: #e9ecef;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            padding: 15px;
+        }
+        .respuesta {
+            background: #d1e7dd;
+            border-radius: 5px;
+            margin-top: 10px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="cartas">
+    <h1>Mis Cartas</h1>
+
+    {% for carta in cartas %}
+        <div class="carta">
+            <h2>{{ carta.titulo }}</h2>
+            <p>{{ carta.contenido }}</p>
+            <h3>Respuestas:</h3>
+
+            {% for respuesta in carta.respuestas.all %}
+                <div class="respuesta">
+                    <p><strong>{{ respuesta.autor.username }}:</strong> {{ respuesta.contenido }}</p>
+                    <p><small>Enviado el {{ respuesta.fecha_creacion }}</small></p>
+
+                    <h4>Responder a esta respuesta:</h4>
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <input type="hidden" name="respuesta_id" value="{{ respuesta.id }}">
+                        <button type="submit">Enviar Respuesta</button>
+                    </form>
+                </div>
+            {% empty %}
+                <p>No hay respuestas aún.</p>
+            {% endfor %}
+        </div>
+    {% empty %}
+        <p>No has enviado ninguna carta.</p>
+    {% endfor %}
+</div>
+
+<a href="{% url 'buzon' %}">Volver al Buzón</a>
+
+</body>
+</html>

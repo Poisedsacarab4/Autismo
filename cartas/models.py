@@ -1,12 +1,19 @@
 from django.db import models
-from django.contrib.auth.models import User  # Importa el modelo de usuario predeterminado
+from django.contrib.auth.models import User
 
 class Carta(models.Model):
-    id = models.AutoField(primary_key=True)  # ID autoincremental
-    titulo = models.CharField(max_length=255)  # Título de la carta
-    contenido = models.TextField()  # Contenido de la carta
-    autor = models.ForeignKey(User, on_delete=models.CASCADE)  # Relación con el usuario
-    creada_en = models.DateTimeField(auto_now_add=True)  # Fecha de creación
+    titulo = models.CharField(max_length=100)
+    contenido = models.TextField()
+    autor = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    def _str_(self):
-        return f'{self.titulo} - {self.autor.username}'
+    def __str__(self):
+        return self.titulo
+
+class Respuesta(models.Model):
+    carta = models.ForeignKey(Carta, related_name='respuestas', on_delete=models.CASCADE)
+    contenido = models.TextField()
+    autor = models.ForeignKey(User, on_delete=models.CASCADE)
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'Respuesta a: {self.carta.titulo}'
