@@ -12,7 +12,7 @@
         <p>Hola, {{ user.username }}!</p>
         <a href="{% url 'logout' %}">Cerrar Sesión</a>
         <a href="{% url 'escribir' %}">escribe tus cartas aqui</a>
-        <a href="{% url 'buzon' %}">recibe cartas aqui</a>
+        <a href="{% url 'buzon' %}">buzon</a>
     {% else %}
         <a href="{% url 'login' %}">Iniciar Sesión</a>
     {% endif %}
