@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: #fff4ca;
             margin: 0;
             padding: 20px;
         }
@@ -31,9 +31,9 @@
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Enviar Respuesta</button>
-    </form>
-    <a href="{% url 'buzon' %}">Volver al Buzón</a>
+        <button type="submit" style="background-color: #add7bf; ">Enviar Respuesta</button>
+    </form> 
+    <a href="{% url 'buzon' %}" ><button style="background-color: #add7bf; ">Volver al Buzón</button></a>
 </div>
 
 </body>

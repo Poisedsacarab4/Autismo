@@ -7,6 +7,10 @@
 </head>
 <body>
     <h1>Iniciar Sesión</h1>
+    <h1 style="background-color: #add7bf; height: 300px; width: 350px; font-size: large; margin-left: 850px; margin-right: 30px; border-radius: 7px; text-align: center; margin-top: 50px;">
+        <br><br>¡Bienvenido {{ user.username }}!
+        <br><br>Hemos diseñado esta página con el propósito de que las personas que son parte de la comunidad neurodivergente sean capaces de expresar sus dificultades, ya sean académicas o personales a la vez que pueden responder a los mensajes de otras personas
+    </h1>
     {% if error %}
         <p style="color:red;">{{ error }}</p>
     {% endif %}

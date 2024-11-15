@@ -4,15 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página Principal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff4ca;
+            margin: 0%;
+            padding: 0%;
+        }
+    </style>
 </head>
 <body>
-    <h1>Bienvenido a la Página Principal</h1>
+    <h1 style=" background-color: #add7bf; text-align:center; height: 60px; margin-top: 0%;font-size: xxx-large;">Tu voz en cartas</h1>
     
     {% if user.is_authenticated %}
-        <p>Hola, {{ user.username }}!</p>
         <a href="{% url 'logout' %}">Cerrar Sesión</a>
-        <a href="{% url 'escribir' %}">escribe tus cartas aqui</a>
-        <a href="{% url 'buzon' %}">buzon</a>
+        <a href="{% url 'escribir' %}">Escribe tus cartas aquí</a>
+        <a href="{% url 'buzon' %}">Buzón</a>
     {% else %}
         <a href="{% url 'login' %}">Iniciar Sesión</a>
     {% endif %}
