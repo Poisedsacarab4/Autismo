@@ -14,7 +14,7 @@
         .respuesta {
             max-width: 600px;
             margin: auto;
-            background: #fff;
+            background: #add7bf;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             padding: 20px;
@@ -31,9 +31,9 @@
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" style="background-color: #add7bf; ">Enviar Respuesta</button>
+        <button type="submit" style="background-color: #aefcff; font-family: Arial, Helvetica, sans-serif; margin-left: 0px; border-radius: 7px; border-color: #aefcff;">Enviar Respuesta</button>
     </form> 
-    <a href="{% url 'buzon' %}" ><button style="background-color: #add7bf; ">Volver al Buzón</button></a>
+    <a href="{% url 'buzon' %}" ><button style="background-color: #aefcff; font-family: Arial, Helvetica, sans-serif; margin-left: 0px; border-radius: 7px; border-color: #aefcff; margin-top: 4px; ">Volver al Buzón</button></a>
 </div>
 
 </body>
