@@ -11,24 +11,65 @@
             margin: 0%;
             padding: 0%;
         }
+
+        button {
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Botón de "Escribe tus cartas aquí" */
+        .btn-escribir {
+            background-color: #ffd0a6;
+            border-color: #ffd0a6;
+            margin-top: 200px;
+            margin-left: 100px;
+            width: 180px;
+        }
+
+        /* Botón de "Buzón" */
+        .btn-buzon {
+            background-color: #ffd0a6;
+            border-color: #ffd0a6;
+            margin-top: 200px;
+            margin-left: 100px;
+            width: 180px;
+        }
+
+        /* Botón de logout */
+        .btn-logout {
+            width: 100px;
+            height: 100px;
+        }
     </style>
 </head>
 <body>
-    <h1 style=" background-color: #add7bf; text-align:center; height: 60px; margin-top: 0%;font-size: xxx-large;">Tu voz en cartas</h1>
+   
+    <h1 style="background-color: #add7bf; text-align:center; height: 60px; margin-top: 0%; font-size: xxx-large;">Tu voz en cartas</h1>
+
+    {% load static %}
     
     {% if user.is_authenticated %}
-    <a href="{% url 'logout' %}">
-        <button >
-            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Pato.jpg" alt="cerrar sesion" style="border: none; width: 100px; height: 100px;">
-        </button>
-    </a>
-        <a href="{% url 'escribir' %}"><button style="background-color: #ffd0a6; border-color: #ffd0a6; margin-top: 200px;
-         margin-left: 100px; width: 180px;">Escribe tus cartas aquí</a></button>
-        <a href="{% url 'buzon' %}"><button style="background-color: #ffd0a6; border-color: #ffd0a6; 
-        margin-top: 200px; margin-left: 100px ; width: 180px">Buzón</a></button>
+        <a href="{% url 'logout' %}">
+            <button class="btn-logout">
+                <img src="{% static 'imagenes/Pato.jpg' %}" alt="cerrar sesion" style="width: 100%; height: 100%;">
+            </button>
+        </a>
+
+        <a href="{% url 'escribir' %}">
+            <button class="btn-escribir">Escribe tus cartas aquí</button>
+        </a>
+        
+        <a href="{% url 'buzon' %}">
+            <button class="btn-buzon">Buzón</button>
+        </a>
+
     {% else %}
-        <a href="{% url 'login' %}"><button style="background-color: aquamarine; margin-left: 600px;
-         margin-top: 180px; height: 30px; border-radius: 7px; border-color: aquamarine;"> Iniciar Sesión</a></button>
+        <a href="{% url 'login' %}">
+            <button style="background-color: aquamarine; margin-left: 600px; margin-top: 180px; height: 30px; border-radius: 7px; border-color: aquamarine;">
+                Iniciar Sesión
+            </button>
+        </a>
     {% endif %}
+
 </body>
 </html>
