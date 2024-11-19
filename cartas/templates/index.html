@@ -4,17 +4,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página Principal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff4ca;
+            margin: 0%;
+            padding: 0%;
+        }
+
+        button {
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Botón de "Escribe tus cartas aquí" */
+        .btn-escribir {
+            background-color: #ffd0a6;
+            border-color: #ffd0a6;
+            margin-top: 200px;
+            margin-left: 100px;
+            width: 180px;
+        }
+
+        /* Botón de "Buzón" */
+        .btn-buzon {
+            background-color: #ffd0a6;
+            border-color: #ffd0a6;
+            margin-top: 200px;
+            margin-left: 100px;
+            width: 180px;
+        }
+
+        /* Botón de logout */
+        .btn-logout {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Bienvenido a la Página Principal</h1>
+   
+    <h1 style="background-color: #add7bf; text-align:center; height: 60px; margin-top: 0%; font-size: xxx-large;">Tu voz en cartas</h1>
+
+    {% load static %}
     
     {% if user.is_authenticated %}
-        <p>Hola, {{ user.username }}!</p>
-        <a href="{% url 'logout' %}">Cerrar Sesión</a>
-        <a href="{% url 'escribir' %}">escribe tus cartas aqui</a>
-        <a href="{% url 'buzon' %}">buzon</a>
+        <a href="{% url 'logout' %}">
+            <button class="btn-logout">
+                <img src="{% static 'imagenes/Pato.jpg' %}" alt="cerrar sesion" style="width: 100%; height: 100%;">
+            </button>
+        </a>
+
+        <a href="{% url 'escribir' %}">
+            <button class="btn-escribir">Escribe tus cartas aquí</button>
+        </a>
+        
+        <a href="{% url 'buzon' %}">
+            <button class="btn-buzon">Buzón</button>
+        </a>
+
     {% else %}
-        <a href="{% url 'login' %}">Iniciar Sesión</a>
+        <a href="{% url 'login' %}">
+            <button style="background-color: aquamarine; margin-left: 600px; margin-top: 180px; height: 30px; border-radius: 7px; border-color: aquamarine;">
+                Iniciar Sesión
+            </button>
+        </a>
     {% endif %}
+
 </body>
 </html>
