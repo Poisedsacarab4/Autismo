@@ -22,8 +22,8 @@
         {% csrf_token %}
         <input type="text" name="titulo" placeholder="Dale titulo a tu carta" required style="margin-left: 0px; height: 50px; width: 1240px; background-color: #89c4a3 ; font-size: 20px; position: relative; border-radius: 7px;">
         <textarea type="text" name="contenido" placeholder="Escribe tu carta aquí" required style="margin-right:100%;margin-left: 0px; height: 350px; width: 1240px; background-color: #89c4a3 ; font-size: 20px; margin-top: 20px; border-radius: 7px;"></textarea>
-        <button type="submit" style="color:rgb(0, 0, 0); margin-top: 15px; background-color: aqua; border-radius: 7px ;">Enviar</button>
+        <button type="submit" style="color:rgb(0, 0, 0); margin-top: 15px; background-color: #89c4a3; border-radius: 7px ;">Enviar</button>
     </form>
-    <a href="{% url 'index' %}"><button style="background-color: #63e21e;border-radius: 7px;"> Volver a la página principal</a></button>
+    <a href="{% url 'index' %}"><button style="background-color: #89c4a3;border-radius: 7px;"> Volver a la página principal</a></button>
 </body>
 </html>
